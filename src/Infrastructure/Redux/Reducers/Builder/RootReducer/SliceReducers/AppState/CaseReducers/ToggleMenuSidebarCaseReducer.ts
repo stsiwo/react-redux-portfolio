@@ -1,21 +1,16 @@
 import { ReducersMapObject } from "redux";
 import { injectable, multiInject } from "inversify";
 import "reflect-metadata";
-import { IAppStateCaseReducer } from "../IAppStateCaseReducer";
-import { IsMenuSidebarOpenStateType } from "../../../../../../../States/StateType";
-import { ToggleMenuSidebarActionType } from "../../../../../../../Actions/AppStateActions/ToggleMenuSidebar/ToggleMenuSidebarActionType";
-import { IToggleMenuSidebarCRAction } from "./IToggleMenuSidebarCRAction";
+import { IAppStateCaseReducer } from "./IAppStateCaseReducer";
+import { IsMenuSidebarOpenStateType } from "../../../../../../States/StateType";
+import { ToggleMenuSidebarActionType, ToggleMenuSidebarActionTypeName } from "../../../../../../Actions/AppStateActions/ToggleMenuSidebarActionType";
 
 @injectable()
 export class ToggleMenuSidebarCaseReducer implements IAppStateCaseReducer<IsMenuSidebarOpenStateType, ToggleMenuSidebarActionType> {
 
-  private _actionTypeList: string[]; 
-
-  public constructor(
-    @multiInject("") actions: IToggleMenuSidebarCRAction[]
-  ) {
-    this._actionTypeList = actions.map(( action: IToggleMenuSidebarCRAction  ) => action.getType()); 
-  }
+  private _actionTypeList: string[] = [
+    ToggleMenuSidebarActionTypeName,
+  ];
 
   getReducer(): ReducersMapObject<IsMenuSidebarOpenStateType, ToggleMenuSidebarActionType> {
     return {

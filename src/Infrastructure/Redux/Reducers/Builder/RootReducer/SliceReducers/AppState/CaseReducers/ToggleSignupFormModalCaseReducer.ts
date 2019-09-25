@@ -1,21 +1,16 @@
 import { ReducersMapObject } from "redux";
 import "reflect-metadata";
 import { injectable, multiInject } from "inversify";
-import { IAppStateCaseReducer } from "../IAppStateCaseReducer";
-import { IsSignupFormModalOpenStateType } from "../../../../../../../States/StateType";
-import { ToggleSignupFormModalActionType } from "../../../../../../../Actions/AppStateActions/ToggleSignupFormModal/ToggleSignupFormModalActionType";
-import { IToggleSignupFormModalCRAction } from "./IToggleSignupFormModalCRAction";
+import { IsSignupFormModalOpenStateType } from "../../../../../../States/StateType";
+import { ToggleSignupFormModalActionType, ToggleSignupFormModalActionTypeName } from "../../../../../../Actions/AppStateActions/ToggleSignupFormModalActionType";
+import { IAppStateCaseReducer } from "./IAppStateCaseReducer";
 
 @injectable()
 export class ToggleSignupFormModalCaseReducer implements IAppStateCaseReducer<IsSignupFormModalOpenStateType, ToggleSignupFormModalActionType> {
 
-  private _actionTypeList: string[]; 
-
-  public constructor(
-    @multiInject("") actions: IToggleSignupFormModalCRAction[]
-  ) {
-    this._actionTypeList = actions.map(( action: IToggleSignupFormModalCRAction  ) => action.getType()); 
-  }
+  private _actionTypeList: string[] = [
+    ToggleSignupFormModalActionTypeName,
+  ];
 
   getReducer(): ReducersMapObject<IsSignupFormModalOpenStateType, ToggleSignupFormModalActionType> {
     return {
