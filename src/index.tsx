@@ -24,8 +24,6 @@ import './UI/Base/Css/Common.scss';
  *
  **/
 
-//const client = myContainer.get<ApolloClientConfig>(TYPES.ApolloClientConfig);
-
 const App = (props: any) => {
   return (
     <div>
