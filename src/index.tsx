@@ -6,6 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './UI/Header/Header';
 import Content from './UI/Content/Content';
 import './UI/Base/Css/Common.scss';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { client } from './Infrastructure/Apollo/clientConfig';
 
 /**
  * typescript: version 3.6 cuases below errors because it remove GlobalFetch in this version
@@ -29,12 +31,14 @@ import './UI/Base/Css/Common.scss';
 const App = (props: any) => {
   return (
     <div>
-      <CssGlobalContext.Provider value={CssGlobalContextDefaultState}>
-        <Router>
-          <Header />
-          <Content />
-        </Router>
-      </CssGlobalContext.Provider>
+      <ApolloProvider client={client}>
+        <CssGlobalContext.Provider value={CssGlobalContextDefaultState}>
+          <Router>
+            <Header />
+            <Content />
+          </Router>
+        </CssGlobalContext.Provider>
+      </ApolloProvider> 
     </div>
   );
 };

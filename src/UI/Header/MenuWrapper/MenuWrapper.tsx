@@ -1,15 +1,21 @@
 import * as React from 'react';
-import './MenuWrapper.scss';
+import { useMenuSidebarQuery } from '../../Base/Hooks/Queries/useMenuSidebarQuery';
 import Menu from './Menu/Menu';
+import './MenuWrapper.scss';
 
 
 const MenuWrapper: React.FunctionComponent<{}> = (props: {}) => {
 
-    return (
-      <div className="header-menu-wrapper">
-        <Menu />
-      </div>
-    );
-} 
+  const isMenuSidebarOpen: boolean = useMenuSidebarQuery();
+
+  let headerWrapperCss = "header-menu-wrapper";
+  if (isMenuSidebarOpen) headerWrapperCss += " header-menu-wrapper-open";
+
+  return (
+    <div className={headerWrapperCss}>
+      <Menu />
+    </div>
+  );
+}
 
 export default MenuWrapper;
