@@ -1,7 +1,6 @@
 import { Reducer, Action, AnyAction, ReducersMapObject } from "redux";
-import { CaseReducerMapObjectType } from "../../CaseReducerMapObjectType";
 
-export interface IAppStateCaseReducer<S = any, A extends Action<any> = AnyAction> {
+export interface IAppStateCaseReducer<S = any, A extends AnyAction = AnyAction> {
 
   getReducer(): ReducersMapObject<S, A>; 
 }

@@ -5,6 +5,7 @@ import { TYPES } from "../../../../../DI/DepTypes";
 import { ISliceReducer } from "./SliceReducers/ISliceReducer";
 import { StateType } from "../../../States/StateType";
 import "reflect-metadata";
+import { defaultState } from "../../../States/defaultState";
 
 @injectable()
 export class RootReducer implements IRootReducer {
@@ -18,7 +19,7 @@ export class RootReducer implements IRootReducer {
   }
 
   combine(): Reducer<StateType, AnyAction> {
-    return (state: StateType, action: AnyAction) => {
+    return (state: StateType = defaultState, action: AnyAction) => {
       return this._sliceReducers.reduce<StateType>((prev, cur) => {
         return { ...prev, ...cur.getSlicerReducerMapObject() }
       }, null);

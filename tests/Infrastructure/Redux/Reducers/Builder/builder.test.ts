@@ -12,6 +12,32 @@ import { IDomainCaseReducer } from "../../../../../src/Infrastructure/Redux/Redu
 import { ToggleTestDomainCaseReducer } from "../../../../../src/Infrastructure/Redux/Reducers/Builder/RootReducer/SliceReducers/Domain/CaseReducers/ToggleTestDomainCaseReducer";
 import { ToggleTestDomain1CaseReducer } from "../../../../../src/Infrastructure/Redux/Reducers/Builder/RootReducer/SliceReducers/Domain/CaseReducers/ToggleTestDomain1CaseReducer";
 import { IRootReducer } from "../../../../../src/Infrastructure/Redux/Reducers/Builder/RootReducer/IRootReducer";
+import { IsMenuSidebarOpenStateType } from "../../../../../src/Infrastructure/Redux/States/StateType";
+import { ToggleMenuSidebarActionType, ToggleMenuSidebarActionTypeName } from "../../../../../src/Infrastructure/Redux/Actions/AppStateActions/ToggleMenuSidebarActionType";
+import { ReducersMapObject } from "redux";
+
+test("b.1.-1", () => {
+
+  const myContainer: Container = new Container();
+
+  myContainer.bind<IAppStateCaseReducer<IsMenuSidebarOpenStateType, ToggleMenuSidebarActionType>>("assr").to(ToggleMenuSidebarCaseReducer);
+
+  const tcr = myContainer.get<IAppStateCaseReducer<IsMenuSidebarOpenStateType, ToggleMenuSidebarActionType>>("assr");
+
+  const caseReducer: ReducersMapObject<IsMenuSidebarOpenStateType, ToggleMenuSidebarActionType> = tcr.getReducer();
+
+  const dummyState = false; 
+
+  const dummyAction = {
+    type: ToggleMenuSidebarActionTypeName,
+    isMenuSidebarOpen: true
+  }
+
+  const expectedResult = true; 
+
+  expect(caseReducer.isMenuSidebarOpen(dummyState, dummyAction)).toBe(expectedResult);
+
+});
 
 test("b.1.1: AppStateSliceReducer should resolve dependency properly", () => {
 
@@ -22,6 +48,8 @@ test("b.1.1: AppStateSliceReducer should resolve dependency properly", () => {
   myContainer.bind<IAppStateCaseReducer>(TYPES.IAppStateCaseReducers).to(ToggleSignupFormModalCaseReducer);
 
   const appStateSliceReducer = myContainer.get<ISliceReducer>("assr");
+
+  console.log(JSON.stringify(appStateSliceReducer.getSlicerReducerMapObject(), null, 4));
 
   expect(typeof appStateSliceReducer.getSlicerReducerMapObject()).toBe("object");
 
@@ -37,6 +65,8 @@ test("b.1.2: DomainSliceReducer should resolve dependency properly", () => {
 
   const domainSliceReducer = myContainer.get<ISliceReducer>("assr");
 
+  console.log(JSON.stringify(domainSliceReducer.getSlicerReducerMapObject(), null, 4));
+
   expect(typeof domainSliceReducer.getSlicerReducerMapObject()).toBe("object");
 
 });
@@ -48,6 +78,8 @@ test("b.1.3: RootReducer should resolve dependency properly", () => {
   reducerConfigBindingModule(myContainer);
 
   const rootReducer = myContainer.get<IRootReducer>(TYPES.IRootReducer);
+
+  console.log(JSON.stringify(rootReducer.combine(), null, 4));
 
   expect(typeof rootReducer.combine()).toBe("function");
 

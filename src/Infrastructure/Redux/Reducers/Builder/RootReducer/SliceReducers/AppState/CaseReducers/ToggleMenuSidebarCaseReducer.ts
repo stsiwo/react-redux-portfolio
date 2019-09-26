@@ -13,6 +13,7 @@ export class ToggleMenuSidebarCaseReducer implements IAppStateCaseReducer<IsMenu
   ];
 
   getReducer(): ReducersMapObject<IsMenuSidebarOpenStateType, ToggleMenuSidebarActionType> {
+    console.log("inside");
     return {
       isMenuSidebarOpen: (isMenuSidebarOpen: boolean, action: ToggleMenuSidebarActionType): boolean => {
         if (this._actionTypeList.includes(action.type)) {
