@@ -5,14 +5,27 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_MENUSIDEBAR_STATUS_QUERY } from '../../../../Infrastructure/Apollo/Queries/getMenuSidebarStatusQuery';
 import { useMenuSidebarQuery } from '../../../Base/Hooks/Queries/useMenuSidebarQuery';
 import MenuCloseIcon from './MenuCloseIcon/MenuCloseIcon';
+import { useLoginQuery } from '../../../Base/Hooks/Queries/useLoginQuery';
+import { useToggleSignupFormModalMutation } from '../../../Base/Hooks/Mutations/useToggleSignupFormModalMutation';
 
 
 const Menu: React.FunctionComponent<{}> = (props: {}) => {
 
+  // menu side bar
   const isMenuSidebarOpen: boolean = useMenuSidebarQuery();
 
   let headerCss = "header-menu-ul";
   if (isMenuSidebarOpen) headerCss += " header-menu-ul-open";
+
+  // login
+  const isLogin: boolean = useLoginQuery();
+
+  // sign up form
+  const toggleSignupFormModal = useToggleSignupFormModalMutation();
+
+  const handleToggleSignupFormModal: React.EventHandler<React.MouseEvent<HTMLLIElement>> = (e) => {
+    toggleSignupFormModal();
+  }
 
   return (
     <ul className={headerCss}>
@@ -26,9 +39,21 @@ const Menu: React.FunctionComponent<{}> = (props: {}) => {
       <li className="header-menu-li">
         <Link className="header-menu-li-link" to="./" >item3</Link>
       </li>
-      <li className="header-menu-li">
-        <Link className="header-menu-li-link" to="./" >item4</Link>
-      </li>
+      {(!isLogin && 
+        <React.Fragment>
+          <li className="header-menu-li" onClick={handleToggleSignupFormModal}>
+            <div>Signup</div>
+          </li>
+          <li className="header-menu-li">
+            <div>Login</div>
+          </li>
+        </React.Fragment>
+      )}
+      {(isLogin &&
+        <li className="header-menu-li">
+          <div>Logout</div>
+        </li>
+      )}
     </ul>
   );
 }
