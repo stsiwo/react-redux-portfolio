@@ -4,6 +4,7 @@ import { ApolloClient } from "apollo-client";
 import { defaultState } from "./defaultState";
 import { toggleMenuSidebarResolver } from "./LocalResolvers/toggleMenuSidebarResolver";
 import { toggleSignupFormModalResolver } from "./LocalResolvers/toggleSignupFormModalResolver";
+import { toggleLoginFormModalResolver } from "./LocalResolvers/toggleLoginFormModalResolver";
 
 const cache = new InMemoryCache();
 
@@ -19,6 +20,7 @@ export const client = new ApolloClient({
     Mutation: {
       ...toggleMenuSidebarResolver,
       ...toggleSignupFormModalResolver,
+      ...toggleLoginFormModalResolver,
     }
   },
 });

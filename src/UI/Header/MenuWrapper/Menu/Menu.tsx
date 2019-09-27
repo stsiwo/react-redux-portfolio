@@ -7,6 +7,7 @@ import { useMenuSidebarQuery } from '../../../Base/Hooks/Queries/useMenuSidebarQ
 import MenuCloseIcon from './MenuCloseIcon/MenuCloseIcon';
 import { useLoginQuery } from '../../../Base/Hooks/Queries/useLoginQuery';
 import { useToggleSignupFormModalMutation } from '../../../Base/Hooks/Mutations/useToggleSignupFormModalMutation';
+import { useToggleLoginFormModalMutation } from '../../../Base/Hooks/Mutations/useToggleLoginFormModalMutation';
 
 
 const Menu: React.FunctionComponent<{}> = (props: {}) => {
@@ -27,6 +28,13 @@ const Menu: React.FunctionComponent<{}> = (props: {}) => {
     toggleSignupFormModal();
   }
 
+  // login form 
+  const toggleLoginFormModal = useToggleLoginFormModalMutation();
+
+  const handleToggleLoginFormModal: React.EventHandler<React.MouseEvent<HTMLLIElement>> = (e) => {
+    toggleLoginFormModal();
+  }
+
   return (
     <ul className={headerCss}>
       <MenuCloseIcon />
@@ -44,7 +52,7 @@ const Menu: React.FunctionComponent<{}> = (props: {}) => {
           <li className="header-menu-li" onClick={handleToggleSignupFormModal}>
             <div>Signup</div>
           </li>
-          <li className="header-menu-li">
+          <li className="header-menu-li" onClick={handleToggleLoginFormModal}>
             <div>Login</div>
           </li>
         </React.Fragment>

@@ -35,7 +35,7 @@ const Header: React.FunctionComponent<{}> = (props: {}) => {
       {(currentScreenWidth < cssGlobal.laptopSize && renderMenuSidebar())}
       {(currentScreenWidth >= cssGlobal.laptopSize && renderHorizontalMenu())}
       <SignupForm />
-    {/*<LoginForm />*/}
+      <LoginForm />
     </header>
   );
 }
