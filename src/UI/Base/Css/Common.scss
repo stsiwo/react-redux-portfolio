@@ -12,3 +12,11 @@
 .regular-icon {
   @include regular-icon;
 }
+
+.modal-form-wrapper {
+  @include modal-form-wrapper;
+}
+
+.modal-form-cover {
+  @include modal-form-cover; 
+}
